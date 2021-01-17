@@ -1,2 +1,2 @@
 # 2021_ENCM369
-# Repository created by Nestor Chacin on 2021 - 01 - 16
+# Repository for the purposes of collaboration with learning community 9 during 2021 ENEL ILS.
