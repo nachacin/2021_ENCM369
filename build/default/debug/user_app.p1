@@ -2585,43 +2585,47 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 2277 ]
 "106
-[; ;user_app.c: 106:         if ((PORTBbits.RB5 == 1) && (rb5_state == 1)){
+[; ;user_app.c: 106:         if ((PORTBbits.RB5 == 1) && (rb5_state == 1))
 [e $ ! && == -> . . _PORTBbits 0 5 `i -> 1 `i == _rb5_state -> 1 `i 2278  ]
-{
 "107
-[; ;user_app.c: 107:             LATA += 1;
-[e =+ _LATA -> -> 1 `i `Vuc ]
+[; ;user_app.c: 107:         {
+{
 "108
-[; ;user_app.c: 108:             counter += 1;
-[e =+ _counter -> -> -> 1 `i `l `ul ]
+[; ;user_app.c: 108:             LATA += 1;
+[e =+ _LATA -> -> 1 `i `Vuc ]
 "109
-[; ;user_app.c: 109:             rb5_state = 0;
-[e = _rb5_state -> 0 `i ]
+[; ;user_app.c: 109:             counter += 1;
+[e =+ _counter -> -> -> 1 `i `l `ul ]
 "110
-[; ;user_app.c: 110:         }
+[; ;user_app.c: 110:             rb5_state = 0;
+[e = _rb5_state -> 0 `i ]
+"111
+[; ;user_app.c: 111:         }
 }
 [e :U 2278 ]
-"111
-[; ;user_app.c: 111:         if (LATA == 0xBF) {
-[e $ ! == -> _LATA `i -> 191 `i 2279  ]
-{
-"112
-[; ;user_app.c: 112:             LATA = 0x80;
-[e = _LATA -> -> 128 `i `uc ]
 "113
-[; ;user_app.c: 113:             break;
-[e $U 2276  ]
+[; ;user_app.c: 113:         if (LATA == 0xBF)
+[e $ ! == -> _LATA `i -> 191 `i 2279  ]
 "114
-[; ;user_app.c: 114:         }
+[; ;user_app.c: 114:         {
+{
+"115
+[; ;user_app.c: 115:             LATA = 0x80;
+[e = _LATA -> -> 128 `i `uc ]
+"116
+[; ;user_app.c: 116:             break;
+[e $U 2276  ]
+"117
+[; ;user_app.c: 117:         }
 }
 [e :U 2279 ]
-"115
-[; ;user_app.c: 115:     }
+"118
+[; ;user_app.c: 118:     }
 }
 [e :U 2274 ]
 [e $U 2275  ]
 [e :U 2276 ]
-"116
-[; ;user_app.c: 116: }
+"119
+[; ;user_app.c: 119: }
 [e :UE 2273 ]
 }

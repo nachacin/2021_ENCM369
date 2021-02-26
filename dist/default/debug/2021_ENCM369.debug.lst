@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.31 build 20201012212115 
-                                                                                               Thu Feb 25 22:53:44 2021
+                                                                                               Fri Feb 26 00:54:06 2021
 
 Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1 
      1                           	processor	18F27Q43
@@ -285,7 +285,7 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    251  01FFAC  6E12               	movwf	UserAppRun@rb5_state^(0+1280),c
    252  01FFAE                     l756:
    253                           
-   254                           ;user_app.c: 106:         if ((PORTBbits.RB5 == 1) && (rb5_state == 1)){
+   254                           ;user_app.c: 106:         if ((PORTBbits.RB5 == 1) && (rb5_state == 1))
    255  01FFAE  AACF               	btfss	207,5,c	;volatile
    256  01FFB0  EFDC  F0FF         	goto	u21
    257  01FFB4  EFDE  F0FF         	goto	u20
@@ -301,10 +301,10 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    267  01FFCA  EFF2  F0FF         	goto	l766
    268  01FFCE                     u30:
    269  01FFCE                     
-   270                           ;user_app.c: 107:             LATA += 1;
+   270                           ;user_app.c: 107:         {;user_app.c: 108:             LATA += 1;
    271  01FFCE  2ABE               	incf	190,f,c	;volatile
    272  01FFD0                     
-   273                           ;user_app.c: 108:             counter += 1;
+   273                           ;user_app.c: 109:             counter += 1;
    274  01FFD0  0E01               	movlw	1
    275  01FFD2  260E               	addwf	UserAppRun@counter^(0+1280),f,c
    276  01FFD4  0E00               	movlw	0
@@ -312,14 +312,14 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    278  01FFD8  2210               	addwfc	(UserAppRun@counter+2)^(0+1280),f,c
    279  01FFDA  2211               	addwfc	(UserAppRun@counter+3)^(0+1280),f,c
    280  01FFDC                     
-   281                           ;user_app.c: 109:             rb5_state = 0;
+   281                           ;user_app.c: 110:             rb5_state = 0;
    282  01FFDC  0E00               	movlw	0
    283  01FFDE  6E13               	movwf	(UserAppRun@rb5_state+1)^(0+1280),c
    284  01FFE0  0E00               	movlw	0
    285  01FFE2  6E12               	movwf	UserAppRun@rb5_state^(0+1280),c
    286  01FFE4                     l766:
    287                           
-   288                           ;user_app.c: 111:         if (LATA == 0xBF) {
+   288                           ;user_app.c: 113:         if (LATA == 0xBF)
    289  01FFE4  0EBF               	movlw	191
    290  01FFE6  18BE               	xorwf	190,w,c	;volatile
    291  01FFE8  A4D8               	btfss	status,2,c
@@ -329,7 +329,7 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    295  01FFF2  EFCC  F0FF         	goto	l752
    296  01FFF6                     u40:
    297  01FFF6                     
-   298                           ;user_app.c: 112:             LATA = 0x80;
+   298                           ;user_app.c: 114:         {;user_app.c: 115:             LATA = 0x80;
    299  01FFF6  0E80               	movlw	128
    300  01FFF8  6EBE               	movwf	190,c	;volatile
    301  01FFFA  0012               	return		;funcret
@@ -1166,7 +1166,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V2.31 build 20201012212115 
-Symbol Table                                                                                   Thu Feb 25 22:53:44 2021
+Symbol Table                                                                                   Fri Feb 26 00:54:06 2021
 
      __size_of_SysTickSetup 0022                          l20 FF3A                          l23 FF5C  
                         l17 FF0C                          l26 FF0E                          l61 FF10  

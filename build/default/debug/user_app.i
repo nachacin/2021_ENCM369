@@ -27324,12 +27324,15 @@ void UserAppRun(void)
             rb5_state = 1;
         }
 
-        if ((PORTBbits.RB5 == 1) && (rb5_state == 1)){
+        if ((PORTBbits.RB5 == 1) && (rb5_state == 1))
+        {
             LATA += 1;
             counter += 1;
             rb5_state = 0;
         }
-        if (LATA == 0xBF) {
+
+        if (LATA == 0xBF)
+        {
             LATA = 0x80;
             break;
         }
