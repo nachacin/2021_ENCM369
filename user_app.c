@@ -93,13 +93,21 @@ Promises:
 
 */
 void UserAppRun(void)
-{
-    u32 u32Counter = FCY/55;
-    LATA = LATA + 0x01;
-    
-    while (u32Counter > 0)
-    {
-        u32Counter -= 1;
+{    
+    u32 counter = 0x00000000;
+    int rb5_state = 0;
+    while (1)
+    { 
+        if (PORTBbits.RB5 == 0)
+        {
+            rb5_state = 1;
+        }
+        
+        if ((PORTBbits.RB5 == 1) && (rb5_state == 1)){
+            LATA += 1;
+            counter += 1;
+            rb5_state = 0;
+        }
         if (LATA == 0xBF) {
             LATA = 0x80;
             break;

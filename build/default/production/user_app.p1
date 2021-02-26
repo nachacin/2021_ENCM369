@@ -1,5 +1,16 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"45585 C:/Program Files/Microchip/MPLABX/v5_45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h
+"46163 C:/Program Files/Microchip/MPLABX/v5_45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h
+[; ;C:/Program Files/Microchip/MPLABX/v5_45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h: 46163:     struct {
+[s S2169 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S2169 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
+"46162
+[; ;C:/Program Files/Microchip/MPLABX/v5_45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h: 46162: typedef union {
+[u S2168 `S2169 1 ]
+[n S2168 . . ]
+"46174
+[; ;C:/Program Files/Microchip/MPLABX/v5_45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h: 46174: extern volatile PORTBbits_t PORTBbits __attribute__((address(0x4CF)));
+[v _PORTBbits `VS2168 ~T0 @X0 0 e@1231 ]
+"45585
 [; ;C:/Program Files/Microchip/MPLABX/v5_45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h: 45585: extern volatile unsigned char LATA __attribute__((address(0x4BE)));
 [v _LATA `Vuc ~T0 @X0 0 e@1214 ]
 "30 ./configuration.h
@@ -2547,45 +2558,70 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U _UserAppRun ]
 [f ]
 "97
-[; ;user_app.c: 97:     u32 u32Counter = (u32)64000000/4/55;
-[v _u32Counter `ul ~T0 @X0 1 a ]
-[e = _u32Counter / / -> -> 64000000 `l `ul -> -> -> 4 `i `l `ul -> -> -> 55 `i `l `ul ]
+[; ;user_app.c: 97:     u32 counter = 0x00000000;
+[v _counter `ul ~T0 @X0 1 a ]
+[e = _counter -> -> -> 0 `i `l `ul ]
 "98
-[; ;user_app.c: 98:     LATA = LATA + 0x01;
-[e = _LATA -> + -> _LATA `i -> 1 `i `uc ]
-"100
-[; ;user_app.c: 100:     while (u32Counter > 0)
-[e $U 2274  ]
+[; ;user_app.c: 98:     int rb5_state = 0;
+[v _rb5_state `i ~T0 @X0 1 a ]
+[e = _rb5_state -> 0 `i ]
+"99
+[; ;user_app.c: 99:     while (1)
 [e :U 2275 ]
+"100
+[; ;user_app.c: 100:     {
+{
 "101
-[; ;user_app.c: 101:     {
-{
+[; ;user_app.c: 101:         if (PORTBbits.RB5 == 0)
+[e $ ! == -> . . _PORTBbits 0 5 `i -> 0 `i 2277  ]
 "102
-[; ;user_app.c: 102:         u32Counter -= 1;
-[e =- _u32Counter -> -> -> 1 `i `l `ul ]
-"103
-[; ;user_app.c: 103:         if (LATA == 0xBF) {
-[e $ ! == -> _LATA `i -> 191 `i 2277  ]
+[; ;user_app.c: 102:         {
 {
+"103
+[; ;user_app.c: 103:             rb5_state = 1;
+[e = _rb5_state -> 1 `i ]
 "104
-[; ;user_app.c: 104:             LATA = 0x80;
-[e = _LATA -> -> 128 `i `uc ]
-"105
-[; ;user_app.c: 105:             break;
-[e $U 2276  ]
-"106
-[; ;user_app.c: 106:         }
+[; ;user_app.c: 104:         }
 }
 [e :U 2277 ]
+"106
+[; ;user_app.c: 106:         if ((PORTBbits.RB5 == 1) && (rb5_state == 1)){
+[e $ ! && == -> . . _PORTBbits 0 5 `i -> 1 `i == _rb5_state -> 1 `i 2278  ]
+{
 "107
-[; ;user_app.c: 107:     }
+[; ;user_app.c: 107:             LATA += 1;
+[e =+ _LATA -> -> 1 `i `Vuc ]
+"108
+[; ;user_app.c: 108:             counter += 1;
+[e =+ _counter -> -> -> 1 `i `l `ul ]
+"109
+[; ;user_app.c: 109:             rb5_state = 0;
+[e = _rb5_state -> 0 `i ]
+"110
+[; ;user_app.c: 110:         }
+}
+[e :U 2278 ]
+"111
+[; ;user_app.c: 111:         if (LATA == 0xBF) {
+[e $ ! == -> _LATA `i -> 191 `i 2279  ]
+{
+"112
+[; ;user_app.c: 112:             LATA = 0x80;
+[e = _LATA -> -> 128 `i `uc ]
+"113
+[; ;user_app.c: 113:             break;
+[e $U 2276  ]
+"114
+[; ;user_app.c: 114:         }
+}
+[e :U 2279 ]
+"115
+[; ;user_app.c: 115:     }
 }
 [e :U 2274 ]
-"100
-[; ;user_app.c: 100:     while (u32Counter > 0)
-[e $ > _u32Counter -> -> -> 0 `i `l `ul 2275  ]
+[e $U 2275  ]
 [e :U 2276 ]
-"108
-[; ;user_app.c: 108: }
+"116
+[; ;user_app.c: 116: }
 [e :UE 2273 ]
 }
