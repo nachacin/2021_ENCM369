@@ -2556,8 +2556,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U _GpioSetup ]
 [f ]
 "91
-[; ;encm369_pic18.c: 91:     LATA = 0x00;
-[e = _LATA -> -> 0 `i `uc ]
+[; ;encm369_pic18.c: 91:     LATA = 0x80;
+[e = _LATA -> -> 128 `i `uc ]
 "92
 [; ;encm369_pic18.c: 92:     ANSELA = 0x00;
 [e = _ANSELA -> -> 0 `i `uc ]

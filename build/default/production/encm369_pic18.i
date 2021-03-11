@@ -27304,7 +27304,7 @@ void ClockSetup(void)
 # 89 "encm369_pic18.c"
 void GpioSetup(void)
 {
-    LATA = 0x00;
+    LATA = 0x80;
     ANSELA = 0x00;
     TRISA = 0x00;
 
