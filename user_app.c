@@ -75,10 +75,47 @@ Promises:
 */
 void UserAppInitialize(void)
 {
-
+    /* LED initialization */
+    LATA = 0x80;
+    
+    /* Timer0 control register initialization to turn timer on, asynchronous mode, 16 bit
+     * Fosc/4, 1:16 pre-scaler, 1:1post-scaler */
+    
+    T0CON0 = 0x90;
+    T0CON1 = 0x54;
 
 } /* end UserAppInitialize() */
 
+/*--------------------------------------------------------------------
+ void TimeXus(INPUT_PARAMETER_)
+ Sets Timer0 to count u16Microseconds_
+ 
+ Requires:
+  - Timer0 configured such that each timer tick is 1 microsecond
+  - INPUT_PARAMETER_ is the value in microseconds to time from 1 to 65535
+ Promises:
+ - Pre-loads TMR0H:L to clock out desired period
+ - TMR0IF cleared
+ - Timer0 enabled
+*/
+
+void TimeXus(u16 u16usecs){
+    /* Disable the timer during config */
+    T0CON0 &= 0x7F;
+    
+    /* Preload TMR0H and TMR0L based on u16TimeXus */
+    u16 u16Timer = 0xFFFF - u16usecs;
+    
+    /* Retrieve 8 LSB's from u16Timer */
+    TMR0L = u16Timer & 0x00FF;
+    
+    /* Retrieve 8 MSB's from u16Timer */
+    TMR0H = (u8) ((u16Timer & 0xFF00) >> 8);
+    
+    /* Clear TMR0IF and enable Timer 0 */
+    PIR3 &= 0x7F;
+    T0CON0 |= 0x80;
+}
   
 /*!----------------------------------------------------------------------------------------------------------------------
 @fn void UserAppRun(void)
@@ -94,34 +131,29 @@ Promises:
 */
 void UserAppRun(void)
 {
-    u32 u32Counter = 400000;
-    u8 u8Temp = LATA, u8Inc, u8Sum, u8Carry;
-    LATA &= 0x80;
-    u8Inc = 0x01;
-    u8Sum = u8Temp ^ u8Inc;
-    u8Carry = u8Temp & u8Inc;
+    static u16 u16Counter = 0x0000;
     
-    while (u8Carry != 0){
-        u8Carry = u8Carry << 1;
-        u8Temp = u8Sum;
-        u8Inc = u8Carry;
-        u8Sum = u8Temp ^ u8Inc;
-        u8Carry = u8Temp & u8Inc;
-    }
-    u8Temp = u8Sum;
-    LATA = u8Sum;
+    static u8 LEDindex = 0x00;
     
-    while (u32Counter > 0) {
-        u32Counter -= 1;
-    }
+    u8 au8Pattern [6] = {0x01, 0x02, 0x04, 0x08, 0x10, 0x20};
     
-    if (u8Temp == 0xBF) {
-        LATA = 0x80;
-        u32Counter = 400000;
-        while (u32Counter > 0) {
-            u32Counter -= 1;
+    u16Counter++;
+    
+    if(u16Counter == 0x01F4){
+        u16Counter = 0x0000;
+        
+        u8 u8Temp = LATA;
+        
+        u8Temp &= 0x80;
+        
+        u8Temp |= au8Pattern[LEDindex];
+        LATA = u8Temp;
+        LEDindex++;
+        
+        if (LEDindex == 0x06){
+            LEDindex = 0;
         }
-    }     
+    }
 } /* end UserAppRun */
 
 
