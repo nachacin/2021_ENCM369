@@ -2547,45 +2547,109 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U _UserAppRun ]
 [f ]
 "97
-[; ;user_app.c: 97:     u32 u32Counter = (u32)64000000/4/55;
+[; ;user_app.c: 97:     u32 u32Counter = 400000;
 [v _u32Counter `ul ~T0 @X0 1 a ]
-[e = _u32Counter / / -> -> 64000000 `l `ul -> -> -> 4 `i `l `ul -> -> -> 55 `i `l `ul ]
+[e = _u32Counter -> -> 400000 `l `ul ]
 "98
-[; ;user_app.c: 98:     LATA = LATA + 0x01;
-[e = _LATA -> + -> _LATA `i -> 1 `i `uc ]
+[; ;user_app.c: 98:     u8 u8Temp = LATA, u8Inc, u8Sum, u8Carry;
+[v _u8Temp `uc ~T0 @X0 1 a ]
+[e = _u8Temp _LATA ]
+[v _u8Inc `uc ~T0 @X0 1 a ]
+[v _u8Sum `uc ~T0 @X0 1 a ]
+[v _u8Carry `uc ~T0 @X0 1 a ]
+"99
+[; ;user_app.c: 99:     LATA &= 0x80;
+[e =& _LATA -> -> 128 `i `Vuc ]
 "100
-[; ;user_app.c: 100:     while (u32Counter > 0)
+[; ;user_app.c: 100:     u8Inc = 0x01;
+[e = _u8Inc -> -> 1 `i `uc ]
+"101
+[; ;user_app.c: 101:     u8Sum = u8Temp ^ u8Inc;
+[e = _u8Sum -> ^ -> _u8Temp `i -> _u8Inc `i `uc ]
+"102
+[; ;user_app.c: 102:     u8Carry = u8Temp & u8Inc;
+[e = _u8Carry -> & -> _u8Temp `i -> _u8Inc `i `uc ]
+"104
+[; ;user_app.c: 104:     while (u8Carry != 0){
 [e $U 2274  ]
 [e :U 2275 ]
-"101
-[; ;user_app.c: 101:     {
 {
-"102
-[; ;user_app.c: 102:         u32Counter -= 1;
-[e =- _u32Counter -> -> -> 1 `i `l `ul ]
-"103
-[; ;user_app.c: 103:         if (LATA == 0xBF) {
-[e $ ! == -> _LATA `i -> 191 `i 2277  ]
-{
-"104
-[; ;user_app.c: 104:             LATA = 0x80;
-[e = _LATA -> -> 128 `i `uc ]
 "105
-[; ;user_app.c: 105:             break;
-[e $U 2276  ]
+[; ;user_app.c: 105:         u8Carry = u8Carry << 1;
+[e = _u8Carry -> << -> _u8Carry `i -> 1 `i `uc ]
 "106
-[; ;user_app.c: 106:         }
-}
-[e :U 2277 ]
+[; ;user_app.c: 106:         u8Temp = u8Sum;
+[e = _u8Temp _u8Sum ]
 "107
-[; ;user_app.c: 107:     }
+[; ;user_app.c: 107:         u8Inc = u8Carry;
+[e = _u8Inc _u8Carry ]
+"108
+[; ;user_app.c: 108:         u8Sum = u8Temp ^ u8Inc;
+[e = _u8Sum -> ^ -> _u8Temp `i -> _u8Inc `i `uc ]
+"109
+[; ;user_app.c: 109:         u8Carry = u8Temp & u8Inc;
+[e = _u8Carry -> & -> _u8Temp `i -> _u8Inc `i `uc ]
+"110
+[; ;user_app.c: 110:     }
 }
 [e :U 2274 ]
-"100
-[; ;user_app.c: 100:     while (u32Counter > 0)
-[e $ > _u32Counter -> -> -> 0 `i `l `ul 2275  ]
+"104
+[; ;user_app.c: 104:     while (u8Carry != 0){
+[e $ != -> _u8Carry `i -> 0 `i 2275  ]
 [e :U 2276 ]
-"108
-[; ;user_app.c: 108: }
+"111
+[; ;user_app.c: 111:     u8Temp = u8Sum;
+[e = _u8Temp _u8Sum ]
+"112
+[; ;user_app.c: 112:     LATA = u8Sum;
+[e = _LATA _u8Sum ]
+"114
+[; ;user_app.c: 114:     while (u32Counter > 0) {
+[e $U 2277  ]
+[e :U 2278 ]
+{
+"115
+[; ;user_app.c: 115:         u32Counter -= 1;
+[e =- _u32Counter -> -> -> 1 `i `l `ul ]
+"116
+[; ;user_app.c: 116:     }
+}
+[e :U 2277 ]
+"114
+[; ;user_app.c: 114:     while (u32Counter > 0) {
+[e $ > _u32Counter -> -> -> 0 `i `l `ul 2278  ]
+[e :U 2279 ]
+"118
+[; ;user_app.c: 118:     if (u8Temp == 0xBF) {
+[e $ ! == -> _u8Temp `i -> 191 `i 2280  ]
+{
+"119
+[; ;user_app.c: 119:         LATA = 0x80;
+[e = _LATA -> -> 128 `i `uc ]
+"120
+[; ;user_app.c: 120:         u32Counter = 400000;
+[e = _u32Counter -> -> 400000 `l `ul ]
+"121
+[; ;user_app.c: 121:         while (u32Counter > 0) {
+[e $U 2281  ]
+[e :U 2282 ]
+{
+"122
+[; ;user_app.c: 122:             u32Counter -= 1;
+[e =- _u32Counter -> -> -> 1 `i `l `ul ]
+"123
+[; ;user_app.c: 123:         }
+}
+[e :U 2281 ]
+"121
+[; ;user_app.c: 121:         while (u32Counter > 0) {
+[e $ > _u32Counter -> -> -> 0 `i `l `ul 2282  ]
+[e :U 2283 ]
+"124
+[; ;user_app.c: 124:     }
+}
+[e :U 2280 ]
+"125
+[; ;user_app.c: 125: }
 [e :UE 2273 ]
 }

@@ -66,7 +66,12 @@
 {
 "97
 [v UserAppRun@u32Counter u32Counter `ul  1 a 4 0 ]
-"108
+"98
+[v UserAppRun@u8Temp u8Temp `uc  1 a 1 7 ]
+[v UserAppRun@u8Inc u8Inc `uc  1 a 1 6 ]
+[v UserAppRun@u8Carry u8Carry `uc  1 a 1 5 ]
+[v UserAppRun@u8Sum u8Sum `uc  1 a 1 4 ]
+"125
 } 0
 "76
 [v _UserAppInitialize UserAppInitialize `(v  1 e 1 0 ]

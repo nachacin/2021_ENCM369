@@ -27315,15 +27315,32 @@ void UserAppInitialize(void)
 # 95 "user_app.c"
 void UserAppRun(void)
 {
-    u32 u32Counter = (u32)64000000/4/55;
-    LATA = LATA + 0x01;
+    u32 u32Counter = 400000;
+    u8 u8Temp = LATA, u8Inc, u8Sum, u8Carry;
+    LATA &= 0x80;
+    u8Inc = 0x01;
+    u8Sum = u8Temp ^ u8Inc;
+    u8Carry = u8Temp & u8Inc;
 
-    while (u32Counter > 0)
-    {
+    while (u8Carry != 0){
+        u8Carry = u8Carry << 1;
+        u8Temp = u8Sum;
+        u8Inc = u8Carry;
+        u8Sum = u8Temp ^ u8Inc;
+        u8Carry = u8Temp & u8Inc;
+    }
+    u8Temp = u8Sum;
+    LATA = u8Sum;
+
+    while (u32Counter > 0) {
         u32Counter -= 1;
-        if (LATA == 0xBF) {
-            LATA = 0x80;
-            break;
+    }
+
+    if (u8Temp == 0xBF) {
+        LATA = 0x80;
+        u32Counter = 400000;
+        while (u32Counter > 0) {
+            u32Counter -= 1;
         }
     }
 }
