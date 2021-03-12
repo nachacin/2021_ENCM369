@@ -2600,14 +2600,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 [e :U _UserAppRun ]
 [f ]
-"134
-[; ;user_app.c: 134:     static u16 u16Counter = 0x0000;
+"135
+[; ;user_app.c: 135:     static u16 u16Counter = 0x0000;
 [v F15925 `us ~T0 @X0 1 s u16Counter ]
 [i F15925
 -> -> 0 `i `us
 ]
-"136
-[; ;user_app.c: 136:     static u8 LEDindex = 0x00;
+"138
+[; ;user_app.c: 138:     static u8 LEDindex = 0x00;
 [v F15926 `uc ~T0 @X0 1 s LEDindex ]
 [i F15926
 -> -> 0 `i `uc
@@ -2615,8 +2615,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v F15927 `uc ~T0 @X0 -> 6 `i s ]
 [i F15927
 :U ..
-"138
-[; ;user_app.c: 138:     u8 au8Pattern [6] = {0x01, 0x02, 0x04, 0x08, 0x10, 0x20};
+"141
+[; ;user_app.c: 141:     u8 au8Pattern [6] = {0x01, 0x02, 0x04, 0x08, 0x10, 0x20};
 -> -> 1 `i `uc
 -> -> 2 `i `uc
 -> -> 4 `i `uc
@@ -2627,48 +2627,48 @@ Version 4.0 HI-TECH Software Intermediate Code
 ]
 [v _au8Pattern `uc ~T0 @X0 -> 6 `i a ]
 [e = _au8Pattern F15927 ]
-"140
-[; ;user_app.c: 140:     u16Counter++;
+"144
+[; ;user_app.c: 144:     u16Counter++;
 [e ++ F15925 -> -> 1 `i `us ]
-"142
-[; ;user_app.c: 142:     if(u16Counter == 0x01F4){
+"147
+[; ;user_app.c: 147:     if(u16Counter == 0x01F4){
 [e $ ! == -> F15925 `ui -> -> 500 `i `ui 2275  ]
 {
-"143
-[; ;user_app.c: 143:         u16Counter = 0x0000;
+"149
+[; ;user_app.c: 149:         u16Counter = 0x0000;
 [e = F15925 -> -> 0 `i `us ]
-"145
-[; ;user_app.c: 145:         u8 u8Temp = LATA;
+"152
+[; ;user_app.c: 152:         u8 u8Temp = LATA;
 [v _u8Temp `uc ~T0 @X0 1 a ]
 [e = _u8Temp _LATA ]
-"147
-[; ;user_app.c: 147:         u8Temp &= 0x80;
+"155
+[; ;user_app.c: 155:         u8Temp &= 0x80;
 [e =& _u8Temp -> -> 128 `i `uc ]
-"149
-[; ;user_app.c: 149:         u8Temp |= au8Pattern[LEDindex];
+"158
+[; ;user_app.c: 158:         u8Temp |= au8Pattern[LEDindex];
 [e =| _u8Temp -> *U + &U _au8Pattern * -> F15926 `ux -> -> # *U &U _au8Pattern `ui `ux `uc ]
-"150
-[; ;user_app.c: 150:         LATA = u8Temp;
+"161
+[; ;user_app.c: 161:         LATA = u8Temp;
 [e = _LATA _u8Temp ]
-"151
-[; ;user_app.c: 151:         LEDindex++;
+"164
+[; ;user_app.c: 164:         LEDindex++;
 [e ++ F15926 -> -> 1 `i `uc ]
-"153
-[; ;user_app.c: 153:         if (LEDindex == 0x06){
+"167
+[; ;user_app.c: 167:         if (LEDindex == 0x06){
 [e $ ! == -> F15926 `i -> 6 `i 2276  ]
 {
-"154
-[; ;user_app.c: 154:             LEDindex = 0;
+"168
+[; ;user_app.c: 168:             LEDindex = 0;
 [e = F15926 -> -> 0 `i `uc ]
-"155
-[; ;user_app.c: 155:         }
+"169
+[; ;user_app.c: 169:         }
 }
 [e :U 2276 ]
-"156
-[; ;user_app.c: 156:     }
+"170
+[; ;user_app.c: 170:     }
 }
 [e :U 2275 ]
-"157
-[; ;user_app.c: 157: }
+"171
+[; ;user_app.c: 171: }
 [e :UE 2274 ]
 }

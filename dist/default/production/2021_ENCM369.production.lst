@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.31 build 20201012212115 
-                                                                                               Thu Mar 11 02:50:04 2021
+                                                                                               Thu Mar 11 21:13:30 2021
 
 Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1 
      1                           	processor	18F27Q43
@@ -328,8 +328,8 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    294  01FF8E                     _UserAppRun:
    295                           	callstack 127
    296  01FF8E                     
-   297                           ;user_app.c: 134:     static u16 u16Counter = 0x0000;;user_app.c: 136:     static u8 LED
-      +                          index = 0x00;;user_app.c: 138:     u8 au8Pattern [6] = {0x01, 0x02, 0x04, 0x08, 0x10, 0x
+   297                           ;user_app.c: 135:     static u16 u16Counter = 0x0000;;user_app.c: 138:     static u8 LED
+      +                          index = 0x00;;user_app.c: 141:     u8 au8Pattern [6] = {0x01, 0x02, 0x04, 0x08, 0x10, 0x
       +                          20};
    298  01FF8E  EE21  F118         	lfsr	2,UserAppRun@F15927
    299  01FF92  EE11  F111         	lfsr	1,UserAppRun@au8Pattern
@@ -339,11 +339,11 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    303  01FF9C  06E8               	decf	wreg,f,c
    304  01FF9E  E2FC               	bc	u11
    305  01FFA0                     
-   306                           ;user_app.c: 140:     u16Counter++;
+   306                           ;user_app.c: 144:     u16Counter++;
    307  01FFA0  4A0D               	infsnz	UserAppRun@u16Counter^(0+1280),f,c
    308  01FFA2  2A0E               	incf	(UserAppRun@u16Counter+1)^(0+1280),f,c
    309  01FFA4                     
-   310                           ;user_app.c: 142:     if(u16Counter == 0x01F4){
+   310                           ;user_app.c: 147:     if(u16Counter == 0x01F4){
    311  01FFA4  0EF4               	movlw	244
    312  01FFA6  180D               	xorwf	UserAppRun@u16Counter^(0+1280),w,c
    313  01FFA8  E106               	bnz	u21
@@ -355,20 +355,20 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    319  01FFB6  EFFD  F0FF         	goto	l88
    320  01FFBA                     u20:
    321  01FFBA                     
-   322                           ;user_app.c: 143:         u16Counter = 0x0000;
+   322                           ;user_app.c: 149:         u16Counter = 0x0000;
    323  01FFBA  0E00               	movlw	0
    324  01FFBC  6E0E               	movwf	(UserAppRun@u16Counter+1)^(0+1280),c
    325  01FFBE  0E00               	movlw	0
    326  01FFC0  6E0D               	movwf	UserAppRun@u16Counter^(0+1280),c
    327  01FFC2                     
-   328                           ;user_app.c: 145:         u8 u8Temp = LATA;
+   328                           ;user_app.c: 152:         u8 u8Temp = LATA;
    329  01FFC2  0061 F2F8  F517    	movff	1214,UserAppRun@u8Temp	;volatile
    330  01FFC8                     
-   331                           ;user_app.c: 147:         u8Temp &= 0x80;
+   331                           ;user_app.c: 155:         u8Temp &= 0x80;
    332  01FFC8  0E80               	movlw	128
    333  01FFCA  1617               	andwf	UserAppRun@u8Temp^(0+1280),f,c
    334  01FFCC                     
-   335                           ;user_app.c: 149:         u8Temp |= au8Pattern[LEDindex];
+   335                           ;user_app.c: 158:         u8Temp |= au8Pattern[LEDindex];
    336  01FFCC  0E11               	movlw	low UserAppRun@au8Pattern
    337  01FFCE  240F               	addwf	UserAppRun@LEDindex^(0+1280),w,c
    338  01FFD0  6ED9               	movwf	fsr2l,c
@@ -378,13 +378,13 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    342  01FFD8  50DF               	movf	indf2,w,c
    343  01FFDA  1217               	iorwf	UserAppRun@u8Temp^(0+1280),f,c
    344  01FFDC                     
-   345                           ;user_app.c: 150:         LATA = u8Temp;
+   345                           ;user_app.c: 161:         LATA = u8Temp;
    346  01FFDC  0061  F45C  F4BE   	movff	UserAppRun@u8Temp,1214	;volatile
    347  01FFE2                     
-   348                           ;user_app.c: 151:         LEDindex++;
+   348                           ;user_app.c: 164:         LEDindex++;
    349  01FFE2  2A0F               	incf	UserAppRun@LEDindex^(0+1280),f,c
    350  01FFE4                     
-   351                           ;user_app.c: 153:         if (LEDindex == 0x06){
+   351                           ;user_app.c: 167:         if (LEDindex == 0x06){
    352  01FFE4  0E06               	movlw	6
    353  01FFE6  180F               	xorwf	UserAppRun@LEDindex^(0+1280),w,c
    354  01FFE8  A4D8               	btfss	status,2,c
@@ -394,7 +394,7 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    358  01FFF2  EFFD  F0FF         	goto	l88
    359  01FFF6                     u30:
    360  01FFF6                     
-   361                           ;user_app.c: 154:             LEDindex = 0;
+   361                           ;user_app.c: 168:             LEDindex = 0;
    362  01FFF6  0E00               	movlw	0
    363  01FFF8  6E0F               	movwf	UserAppRun@LEDindex^(0+1280),c
    364  01FFFA                     l88:
@@ -1322,7 +1322,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V2.31 build 20201012212115 
-Symbol Table                                                                                   Thu Mar 11 02:50:04 2021
+Symbol Table                                                                                   Thu Mar 11 21:13:30 2021
 
      __size_of_SysTickSetup 0022                          l13 FEB4                          l22 FEB6  
                         l16 FECC                          l19 FF1A                          l52 FF76  

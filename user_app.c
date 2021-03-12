@@ -131,25 +131,39 @@ Promises:
 */
 void UserAppRun(void)
 {
+    /* Initialize a 16-bit counter variable at zero */
     static u16 u16Counter = 0x0000;
     
+    /* Initialize an index variable for the led pattern array */
     static u8 LEDindex = 0x00;
     
+    /* Define LED  patterns by setting elements to desired HEX values */
     u8 au8Pattern [6] = {0x01, 0x02, 0x04, 0x08, 0x10, 0x20};
     
+    /* Increment the counter by one to cause delay through multiple calls */
     u16Counter++;
     
+    /* Execute code for changing LED patterns once u16Counter reaches 500 */
     if(u16Counter == 0x01F4){
+        /* Initialize a 16-bit counter variable at zero */
         u16Counter = 0x0000;
         
+        /* Read LATA to a temporary variable */
         u8 u8Temp = LATA;
         
+        /* Use a bitmask operation to clear the 6 LSB's */
         u8Temp &= 0x80;
         
+        /* Use bit-wise inclusive OR to assign desired bit pattern to temp */
         u8Temp |= au8Pattern[LEDindex];
+        
+        /* Write Temp back to LATA */
         LATA = u8Temp;
+        
+        /* Increment LEDIndex by 1 for the next call */
         LEDindex++;
         
+        /* Reset index to 0 when the end of the array is reached */
         if (LEDindex == 0x06){
             LEDindex = 0;
         }

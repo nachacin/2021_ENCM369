@@ -27341,24 +27341,38 @@ void TimeXus(u16 u16usecs){
 # 132 "user_app.c"
 void UserAppRun(void)
 {
+
     static u16 u16Counter = 0x0000;
+
 
     static u8 LEDindex = 0x00;
 
+
     u8 au8Pattern [6] = {0x01, 0x02, 0x04, 0x08, 0x10, 0x20};
+
 
     u16Counter++;
 
+
     if(u16Counter == 0x01F4){
+
         u16Counter = 0x0000;
+
 
         u8 u8Temp = LATA;
 
+
         u8Temp &= 0x80;
 
+
         u8Temp |= au8Pattern[LEDindex];
+
+
         LATA = u8Temp;
+
+
         LEDindex++;
+
 
         if (LEDindex == 0x06){
             LEDindex = 0;
