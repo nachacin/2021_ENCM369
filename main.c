@@ -51,20 +51,20 @@ void main(void)
   /* Super loop */  
   while(1)
   {
-    /* Drivers */
-       
-    /* Applications */
+     /* Drivers */
+     /* Applications */
+      
+#if 1
     UserAppRun();
-   
-     
     /* System sleep */
     HEARTBEAT_OFF();
     SystemSleep();
-    TimeXus(1000);
+    TimeXus(11);
     while((PIR3 & 0x80) != 0x80);
     HEARTBEAT_ON();
-    
-  } /* end while(1) main super loop */
+#endif
+    /* end while(1) main super loop */
+}
   
 } /* end main() */
 
